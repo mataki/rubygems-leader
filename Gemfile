@@ -5,7 +5,10 @@ gem 'rails', '3.2.6'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
+group :production do
+  gem "pg"
+  gem "thin"
+end
 
 
 # Gems used only for assets and not required
@@ -37,12 +40,17 @@ end
 # To use debugger
 # gem 'debugger'
 
-gem "capybara", :group => [:development, :test]
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem "jquery-rails"
-gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
 gem 'twitter-bootstrap-rails'
 gem "mechanize"
 gem 'gravatar_image_tag'
 gem 'kaminari'
+
+group :development, :test do
+  gem "heroku_san"
+  gem "rspec-rails", ">= 2.0.1"
+  gem "capybara"
+  gem 'sqlite3'
+end
