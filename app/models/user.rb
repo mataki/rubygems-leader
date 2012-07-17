@@ -36,11 +36,10 @@ class User < ActiveRecord::Base
     crowl_numeric(max_num + 1, renge)
   end
 
-  def self.update_data(period = 3.day)
-    transaction do
-      self.where("updated_at < ?", period.ago).each do |user|
-        fetch_and_save!(user.profile_id)
-      end
+  def self.update_data(period = 3.day, limit = 30, sleep_sec = 5)
+    self.where("updated_at < ?", period.ago).limit(limit).each do |user|
+      fetch_and_save!(user.profile_id)
+      sleep sleep_sec.second
     end
   end
 
