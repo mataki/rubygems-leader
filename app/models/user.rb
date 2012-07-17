@@ -11,6 +11,22 @@ class User < ActiveRecord::Base
     user.save!
   end
 
+  def self.crowl_numeric(start_num, renge)
+    (start_num...start_num+renge).each do |i|
+      begin
+        fetch_and_save!(i)
+      rescue => e
+        logger.error "[Fetch Error] profile_id: #{i}"
+        logger.error e
+      end
+    end
+  end
+
+  def self.crowl_from_max(renge)
+    max_num = self.order('profile_id DESC').first.try(:profile_id) || 0
+    crowl_numeric(max_num + 1, renge)
+  end
+
   class Fetcher
     def self.get(profile_id)
       new.get(profile_id)
