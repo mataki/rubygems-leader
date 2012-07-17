@@ -2,10 +2,13 @@
 .page-header
   %h1 Leaders
 
+.page-info
+  != page_entries_info @users
+
 %table.table.table-striped
   %thead
     %tr
-      %th= model_class.human_attribute_name(:handle)
+      %th Name
       %th= model_class.human_attribute_name(:total_downloads)
       %th= model_class.human_attribute_name(:updated_at)
 
@@ -18,3 +21,5 @@
             = user.handle
         %td= user.total_downloads
         %td=l user.updated_at, format: :short
+
+= paginate @users

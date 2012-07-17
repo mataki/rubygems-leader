@@ -45,3 +45,4 @@ gem "rspec-rails", ">= 2.0.1", :group => [:development, :test]
 gem 'twitter-bootstrap-rails'
 gem "mechanize"
 gem 'gravatar_image_tag'
+gem 'kaminari'
