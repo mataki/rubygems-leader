@@ -5,6 +5,11 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :profile_id, presence: true
 
+  def self.find_page_by_handle(handle, per)
+    user = find_by_handle(handle)
+    page = ((user.rank - 1) / per) + 1 if user
+  end
+
   def self.fetch_and_save!(profile_id)
     user = User.find_or_initialize_by_profile_id(profile_id)
     user.attributes = Fetcher.get(profile_id)

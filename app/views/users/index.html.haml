@@ -1,3 +1,8 @@
+= form_tag root_path, method: :get, class: "well form-search" do
+  Search by rubygems.org name
+  = text_field_tag :user, params[:user], class: "input-medium search-query"
+  = submit_tag "Search", class: "btn"
+
 .page-info
   != page_entries_info @users
 
@@ -18,4 +23,4 @@
             = user.handle
         %td= number_to_human user.total_downloads
 
-= paginate @users
+= paginate @users if params[:user].blank?
