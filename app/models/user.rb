@@ -12,7 +12,9 @@ class User < ActiveRecord::Base
   end
 
   def self.crowl_numeric(start_num, renge)
-    (start_num...start_num+renge).each do |i|
+    logger.info "[FETCH START] from #{start_num}"
+    end_num = start_num+renge
+    (start_num...end_num).each do |i|
       begin
         fetch_and_save!(i)
       rescue => e
@@ -20,6 +22,7 @@ class User < ActiveRecord::Base
         logger.error e
       end
     end
+    logger.info "[FETCH END] from #{end_num}"
   end
 
   def self.crowl_from_max(renge)
