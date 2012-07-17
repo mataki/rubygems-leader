@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
 
   def self.refresh_rank
     self.transaction do
-      User.update_all('rank = ?', nil)
+      User.update_all({ rank: nil })
       User.order("total_downloads DESC").each_with_index do |user, index|
         user.rank = index + 1
         user.save
