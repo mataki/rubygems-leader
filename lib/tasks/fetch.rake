@@ -1,4 +1,5 @@
 desc "Fetch numeric"
 task fetch: :environment do
-  User.crowl_from_max(100)
+  num = ENV["num"].to_i || 100
+  User.crowl_from_max(num)
 end
