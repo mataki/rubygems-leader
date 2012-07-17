@@ -36,6 +36,14 @@ class User < ActiveRecord::Base
     crowl_numeric(max_num + 1, renge)
   end
 
+  def self.update_data(period = 3.day)
+    transaction do
+      self.where("updated_at < ?", period.ago).each do |user|
+        fetch_and_save!(user.profile_id)
+      end
+    end
+  end
+
   def self.refresh_rank
     self.transaction do
       User.update_all('rank = ?', nil)
