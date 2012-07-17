@@ -4,18 +4,18 @@
 %table.table.table-striped
   %thead
     %tr
+      %th Rank
       %th Name
       %th Total Downloads
-      %th Updated at
 
   %tbody
     - @users.each do |user|
       %tr
+        %td= user.rank
         %td
           = link_to rubygems_url(user.profile_id), target: "_blank" do
             = gravatar_image_tag user.email, alt: user.handle, gravatar: { size: 30 }
             = user.handle
         %td= number_to_human user.total_downloads
-        %td=l user.updated_at, format: :short
 
 = paginate @users

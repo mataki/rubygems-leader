@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120717110503) do
+ActiveRecord::Schema.define(:version => 20120717175334) do
 
   create_table "users", :force => true do |t|
     t.string   "email"
@@ -20,6 +20,10 @@ ActiveRecord::Schema.define(:version => 20120717110503) do
     t.integer  "total_downloads"
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
+    t.integer  "rank"
   end
+
+  add_index "users", ["rank"], :name => "index_users_on_rank"
+  add_index "users", ["total_downloads"], :name => "index_users_on_total_downloads"
 
 end

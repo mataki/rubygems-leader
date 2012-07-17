@@ -14,12 +14,18 @@ class User < ActiveRecord::Base
   def self.crowl_numeric(start_num, renge)
     logger.info "[FETCH START] from #{start_num}"
     end_num = start_num+renge
+    failed_count = 0
     (start_num...end_num).each do |i|
       begin
         fetch_and_save!(i)
       rescue => e
         logger.error "[Fetch Error] profile_id: #{i}"
         logger.error e
+        failed_count += 1
+        if failed_count > 10
+          logger.error "[Fetch Error] Overlimit: #{failed_count}"
+          raise e
+        end
       end
     end
     logger.info "[FETCH END] from #{end_num}"
@@ -28,6 +34,16 @@ class User < ActiveRecord::Base
   def self.crowl_from_max(renge)
     max_num = self.order('profile_id DESC').first.try(:profile_id) || 0
     crowl_numeric(max_num + 1, renge)
+  end
+
+  def self.refresh_rank
+    self.transaction do
+      User.update_all('rank = ?', nil)
+      User.order("total_downloads DESC").each_with_index do |user, index|
+        user.rank = index + 1
+        user.save
+      end
+    end
   end
 
   class Fetcher
