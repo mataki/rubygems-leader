@@ -11,7 +11,7 @@ namespace :fetch do
   end
 end
 
-namespace :reflash do
+namespace :reflesh do
   desc "Reflesh ranking"
   task rank: :environment do
     User.refresh_rank
