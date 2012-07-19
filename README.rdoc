@@ -1,3 +1,3 @@
 == Rubygems Leader
 
-Rubygams.org Leaderboard
+Rubygams.org Leaderboard http://rubygems-leader.herokuapp.com/
