@@ -1,5 +1,6 @@
 == Rubygems Leader
 
 {<img src="https://secure.travis-ci.org/mataki/rubygems-leader.png" />}[http://travis-ci.org/mataki/rubygems-leader]
+{<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/mataki/rubygems-leader]
 
 Rubygams.org Leaderboard http://rubygems-leader.herokuapp.com/
