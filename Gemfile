@@ -51,6 +51,16 @@ gem 'kaminari'
 group :development, :test do
   gem "heroku_san"
   gem "rspec-rails", ">= 2.0.1"
-  gem "capybara"
   gem 'sqlite3'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'launchy'
+  gem 'guard-rspec'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'shoulda-matchers', :require => false
+  # poltergeist for requests specs?
 end

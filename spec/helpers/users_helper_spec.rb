@@ -11,5 +11,9 @@ require 'spec_helper'
 #   end
 # end
 describe UsersHelper do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'rubygems_url' do
+    it 'returns the rubygems url for the specified profile_id' do
+      helper.rubygems_url(1).should == 'http://rubygems.org/profiles/1'
+    end
+  end
 end

@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   validates :email, presence: true
   validates :profile_id, presence: true
 
+  validates_uniqueness_of :profile_id
+
   def self.find_page_by_handle(handle, per)
     user = find_by_handle(handle)
     page = ((user.rank - 1) / per) + 1 if user
