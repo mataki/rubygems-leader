@@ -1,19 +1,19 @@
 namespace :fetch do
   desc "Fetch all profile with numeric"
   task all: :environment do
-    num = ENV["num"].to_i || 100
-    User.crowl_from_max(num)
+    num = ENV["num"] ? ENV['num'].to_i : 100
+    Fetcher.crawl_from_max(num)
   end
 
   desc "Update data since 3 days"
   task update: :environment do
-    User.update_data
+    Fetcher.update_data
   end
 end
 
-namespace :reflesh do
-  desc "Reflesh ranking"
+namespace :refresh do
+  desc "Refresh ranking"
   task rank: :environment do
-    User.refresh_rank
+    Fetcher.refresh_rank
   end
 end
