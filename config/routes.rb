@@ -3,7 +3,7 @@ RubygemsLeader::Application.routes.draw do
     resources :memberships
   end
 
-  resources :users, only: :index
+  resources :users, only: %w(index show)
 
   root to: "users#index"
 

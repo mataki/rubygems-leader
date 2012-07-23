@@ -24,19 +24,19 @@ describe User do
   context 'class methods' do
 
     before :each do
-      @user = FactoryGirl.create(:user, rank: 19)
+      @user = FactoryGirl.create(:user, rank: 4, total_downloads: 100)
+      FactoryGirl.create(:user, rank: 1, total_downloads: 1)
     end
 
     it "returns the page for the user based on ranking and assumes that ranking will never be sparse" do
-      User.find_page_by_handle(@user.handle, 2).should be(10)
+      User.find_page_by_handle(@user.handle, 2).should be(2)
     end
 
     it "refreshes the ranking" do
       User.refresh_rank
-      User.first.rank.should be(1)
+      User.find(@user.id).rank.should eq(1)
     end
   end
-
 end
 
 

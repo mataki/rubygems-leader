@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :memberships
   has_many :teams, through: :memberships
+  has_many :rank_histories
 
   validates :handle, presence: true
   validates :email, presence: true
@@ -26,11 +27,19 @@ class User < ActiveRecord::Base
 
   def self.refresh_rank
     self.transaction do
-      self.update_all({ rank: nil })
-      self.order("total_downloads DESC").each_with_index do |user, index|
-        self.where(id: user.id).update_all(rank: index + 1)
-      end
+      # SQL-FOO - NOTE this will only work on postgres!!
+      sql = "update users
+               set rank = d_rnk, updated_at = now()
+               from (SELECT id,row_number() OVER (ORDER BY total_downloads DESC) as d_rnk FROM users) as ranked
+               where ranked.id = users.id;"
+      ActiveRecord::Base.connection.execute(sql)
     end
   end
 
+  after_save :create_rank_history
+  def create_rank_history
+    if rank_changed?
+      self.rank_histories.create!(rank: self.rank)
+    end
+  end
 end
