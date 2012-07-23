@@ -10,6 +10,15 @@ class User < ActiveRecord::Base
 
   validates_uniqueness_of :profile_id
 
+  def fetcher
+    @fetcher ||= Fetcher.new(profile_id)
+  end
+
+  def update_from_rubygems
+    self.attributes = fetcher.get
+    self.save!
+  end
+
   def self.find_page_by_handle(handle, per)
     user = find_by_handle(handle)
     page = ((user.rank - 1) / per) + 1 if user

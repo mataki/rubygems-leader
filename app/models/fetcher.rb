@@ -1,12 +1,18 @@
 class Fetcher
-  def self.logger
-    @@logger ||= ActiveRecord::Base.logger
+ 
+  # instantiates a new fetcher for a specific rubygems profile
+  # @param [Integer] profile_id the id of the profile to fetch for
+  def initialize(profile_id)
+    @profile_id = profile_id
   end
 
+
+  # TODO move this stuff out into a pair of jobs:
+  # UpdateScheduler - spins off single UpdateUser jobs
+  # UpdateUser - runs update_from_ruby_gems for the profile_id
   def self.fetch_and_save!(profile_id)
     user = User.find_or_initialize_by_profile_id(profile_id)
-    user.attributes = Fetcher.get(profile_id)
-    user.save!
+    user.update_from_rubygems
   end
 
   def self.crawl_numeric(start_num, range)
@@ -42,20 +48,46 @@ class Fetcher
   end
 
   def self.get(profile_id)
-    new.get(profile_id)
+    new(profile_id).get
+  end
+
+  def get
+    @data ||= { handle: handle, total_downloads: total_downloads, email: email }
+  end
+
+  private
+
+  def self.logger
+    @@logger ||= ActiveRecord::Base.logger
+  end
+
+  def page
+    @page ||= agent.get(Fetcher.fetch_url % @profile_id)
+  end
+
+  def handle
+    page.search("#profile-name").inner_text
+  end
+
+  def total_downloads
+    humanized_values = page.search("#downloads_count strong").map(&:inner_text)
+    integer_values = humanized_values.map do |downloads|
+      downloads.gsub(',', "").to_i
+    end
+    integer_values.max
+  end
+
+  def email
+    encoded_email = page.search('#profile-email a').attr('href')
+    URI.decode encoded_email.to_s.gsub('mailto:', "")
   end
 
   def agent
     @agent ||= Mechanize.new
   end
 
-  def get(profile_id)
-    page = agent.get("http://rubygems.org/profiles/#{profile_id}")
-    name = page.search("#profile-name").inner_text
-    total_downloads = page.search("#downloads_count strong").map(&:inner_text).map{|t| t.gsub(',', "")}.map(&:to_i).max
-    encoded_email = page.search('#profile-email a').attr('href').to_s.gsub('mailto:', "")
-    email = URI.decode(encoded_email)
-    { handle: name, total_downloads: total_downloads, email: email }
+  def self.fetch_url
+    @@fetch_url ||= "http://rubygems.org/profiles/%s"
   end
 end
 
