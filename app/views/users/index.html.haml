@@ -18,7 +18,7 @@
       %tr
         %td= user.rank
         %td
-          = link_to rubygems_url(user.profile_id), target: "_blank" do
+          = link_to user do
             = gravatar_image_tag user.email, alt: user.handle, gravatar: { size: 30 }
             = user.handle
         %td= number_to_human user.total_downloads

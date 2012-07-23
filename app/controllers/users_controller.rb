@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  # GET /users
-  # GET /users.json
+
   def index
     per = params[:per].present? ? params[:per].to_i : 25
     @users = User.order("rank ASC, total_downloads DESC")
@@ -20,6 +19,15 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @users }
+    end
+  end
+
+  def show
+    @user = User.find params[:id]
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @user }
     end
   end
 end
