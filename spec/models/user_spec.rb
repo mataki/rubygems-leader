@@ -20,4 +20,23 @@ describe User do
     it { should allow_mass_assignment_of :profile_id }
     it { should allow_mass_assignment_of :total_downloads }
   end
+
+  context 'class methods' do
+
+    before :each do
+      @user = FactoryGirl.create(:user, rank: 19)
+    end
+
+    it "returns the page for the user based on ranking and assumes that ranking will never be sparse" do
+      User.find_page_by_handle(@user.handle, 2).should be(10)
+    end
+
+    it "refreshes the ranking" do
+      User.refresh_rank
+      User.first.rank.should be(1)
+    end
+  end
+
 end
+
+
