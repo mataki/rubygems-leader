@@ -10,10 +10,3 @@ namespace :fetch do
     Fetcher.update_data
   end
 end
-
-namespace :refresh do
-  desc "Refresh ranking"
-  task rank: :environment do
-    Fetcher.refresh_rank
-  end
-end
