@@ -1,6 +1,9 @@
 class User < ActiveRecord::Base
   attr_accessible :email, :handle, :profile_id, :total_downloads
 
+  has_many :memberships
+  has_many :teams, through: :memberships
+
   validates :handle, presence: true
   validates :email, presence: true
   validates :profile_id, presence: true

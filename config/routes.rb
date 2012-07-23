@@ -1,4 +1,8 @@
 RubygemsLeader::Application.routes.draw do
+  resources :teams do
+    resources :memberships
+  end
+
   resources :users, only: :index
 
   root to: "users#index"

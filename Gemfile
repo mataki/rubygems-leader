@@ -47,6 +47,8 @@ gem 'twitter-bootstrap-rails'
 gem "mechanize"
 gem 'gravatar_image_tag'
 gem 'kaminari'
+gem "simple_form"
+gem "dekiru"
 
 group :development, :test do
   gem "heroku_san"

@@ -1,0 +1,36 @@
+.page-header
+  %h1
+    = @team.name
+    - if @team.url.present?
+      %small
+        %i.icon-globe
+        = link_to @team.url
+
+%table.table.table-striped.table-bordered.table-condensed
+  %thead
+    %tr
+      %th Rank
+      %th Name
+      %th Total Downloads
+      %th
+
+  %tbody
+    = content_tag_for :tr, @team.memberships.order('rank') do |membership|
+      - user = membership.user
+      %td= membership.rank
+      %td
+        = link_to rubygems_url(user.profile_id), target: "_blank" do
+          = gravatar_image_tag user.email, alt: user.handle, gravatar: { size: 30 }
+          = user.handle
+      %td= number_to_human user.total_downloads
+      %td= link_to "Delete", [@team, membership], method: :delete, confirm: "Are you sure?"
+
+= simple_form_for [@team, @team.memberships.build] do |form|
+  .form-inputs
+    = form.input :user_name
+  .form-submit
+    = form.submit
+
+= link_to 'Edit', edit_team_path(@team)
+\|
+= link_to 'Back', teams_path
