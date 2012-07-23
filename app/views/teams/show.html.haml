@@ -4,7 +4,7 @@
     - if @team.url.present?
       %small
         %i.icon-globe
-        = link_to @team.url
+        = link_to @team.url, @team.url, target: "_blank"
 
 %table.table.table-striped.table-bordered.table-condensed
   %thead
