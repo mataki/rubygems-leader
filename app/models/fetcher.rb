@@ -13,8 +13,6 @@ class Fetcher
     logger.info "[FETCH START] from #{start_num}"
     end_num = start_num+range
     failed_count = 0
-    puts start_num
-    puts end_num
     (start_num...end_num).each do |i|
       begin
         fetch_and_save!(i)
