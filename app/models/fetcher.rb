@@ -12,9 +12,7 @@ class Fetcher
   # UpdateUser - runs update_from_ruby_gems for the profile_id
   def self.fetch_and_save!(profile_id)
     user = User.find_or_initialize_by_profile_id(profile_id)
-    if user.total_downloads > 0
-      user.update_from_rubygems
-    end
+    user.update_from_rubygems
   end
 
   def self.crawl_numeric(start_num, range)

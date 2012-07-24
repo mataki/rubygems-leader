@@ -17,7 +17,9 @@ class User < ActiveRecord::Base
 
   def update_from_rubygems
     self.attributes = fetcher.get
-    self.save!
+    if total_downloads > 0
+      self.save!
+    end
   end
 
   def self.find_page_by_handle(handle, per)
