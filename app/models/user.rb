@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
     self.transaction do
       # SQL-FOO - NOTE this will only work on postgres!!
       sql = "update users
-               set rank = d_rnk, updated_at = now()
+               set rank = d_rnk
                from (SELECT id,row_number() OVER (ORDER BY total_downloads DESC) as d_rnk FROM users) as ranked
                where ranked.id = users.id;"
       ActiveRecord::Base.connection.execute(sql)
