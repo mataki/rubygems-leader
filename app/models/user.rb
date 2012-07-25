@@ -17,7 +17,9 @@ class User < ActiveRecord::Base
 
   def update_from_rubygems
     self.attributes = fetcher.get
-    self.save!
+    if total_downloads > 0
+      self.save!
+    end
   end
 
   def self.find_page_by_handle(handle, per)
@@ -27,13 +29,12 @@ class User < ActiveRecord::Base
 
   def self.refresh_rank
     self.transaction do
-      self.update_all({ rank: nil })
-      self.record_timestamps = false
-      self.order("total_downloads DESC").each_with_index do |user, index|
-        user.rank = index + 1
-        user.save
-      end
-      self.record_timestamps = true
+      # SQL-FOO - NOTE this will only work on postgres!!
+      sql = "update users
+               set rank = d_rnk, updated_at = now()
+               from (SELECT id,row_number() OVER (ORDER BY total_downloads DESC) as d_rnk FROM users) as ranked
+               where ranked.id = users.id;"
+      ActiveRecord::Base.connection.execute(sql)
     end
   end
 
