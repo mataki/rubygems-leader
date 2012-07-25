@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  context 'factory' do 
+  context 'factory' do
     subject { FactoryGirl.build :user }
     it { should be_valid }
   end
@@ -38,5 +38,3 @@ describe User do
     end
   end
 end
-
-

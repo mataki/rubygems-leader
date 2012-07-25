@@ -38,10 +38,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  after_save :create_rank_history
-  def create_rank_history
-    if rank_changed?
-      self.rank_histories.create!(rank: self.rank)
+  def self.create_rank_histories
+    self.find_in_batches do |group|
+      group.each do |user|
+        user.rank_histories.create(rank: self.rank)
+      end
     end
   end
 end
