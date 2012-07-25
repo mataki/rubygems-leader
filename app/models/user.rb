@@ -39,9 +39,11 @@ class User < ActiveRecord::Base
   end
 
   def self.create_rank_histories
-    self.find_in_batches do |group|
-      group.each do |user|
-        user.rank_histories.create(rank: self.rank)
+    self.transaction do
+      self.find_in_batches do |group|
+        group.each do |user|
+          user.rank_histories.create(rank: user.rank)
+        end
       end
     end
   end
