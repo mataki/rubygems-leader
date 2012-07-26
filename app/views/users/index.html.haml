@@ -1,28 +1,28 @@
 = form_tag root_path, method: :get, class: "well form-search" do
   Search by rubygems.org name
-  = text_field_tag :user, params[:user], class: "input-medium search-query"
+  = text_field_tag :page, @handle, class: "input-medium search-query"
   = submit_tag "Search", class: "btn"
 
 .page-info
   != page_entries_info @users
 
-%table.table.table-striped
+%table.users.table.table-striped.table-bordered.table-condensed
   %thead
     %tr
       %th Rank
       %th Name
       %th Total Downloads
       %th Coderwall
-  %tbody
-    - @users.each do |user|
-      %tr
-        %td= user.rank
-        %td
-          = link_to rubygems_url(user.profile_id), target: "_blank" do
-            = gravatar_image_tag user.email, alt: user.handle, gravatar: { size: 30 }
-            = user.handle
-        %td= number_to_human user.total_downloads
-        %td{ :width => "300" }
-          %section.coderwall{ :'data-coderwall-username' => user.handle, :'data-not-found' => "users/#{user.id}/claim_identity" }
 
-= paginate @users if params[:user].blank?
+  %tbody
+    = content_tag_for :tr, @users do |user|
+      %td= user.rank
+      %td
+        = link_to rubygems_url(user.profile_id), target: "_blank" do
+          = gravatar_image_tag user.email, alt: user.handle, gravatar: { size: 30 }
+          = user.handle
+      %td= number_to_human user.total_downloads
+      %td{ :width => "300" }
+        %section.coderwall{ :'data-coderwall-username' => user.handle, :'data-not-found' => "users/#{user.id}/claim_identity" }
+
+= paginate @users
