@@ -1,10 +1,12 @@
 RubygemsLeader::Application.routes.draw do
+  
   resources :teams do
     resources :memberships
   end
 
   resources :users, only: %w(index show)
 
+  match 'users/:id/claim_identity' => "users#claim_identity"
   root to: "users#index"
 
   # The priority is based upon order of creation:

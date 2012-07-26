@@ -23,5 +23,6 @@
             = user.handle
         %td= number_to_human user.total_downloads
         %td{ :width => "300" }
-          %section.coderwall{ :'data-coderwall-username' => user.handle, :'data-coderwall-orientation' =>  "horizontal" }
+          %section.coderwall{ :'data-coderwall-username' => user.handle, :'data-not-found' => "users/#{user.id}/claim_identity" }
+
 = paginate @users if params[:user].blank?

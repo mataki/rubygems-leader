@@ -25,6 +25,7 @@
 
     return $(".coderwall").each(function() {
       var root = $(this),
+          not_found  = $(this).attr('data-not-found') || null,
           username    = $(this).attr("data-coderwall-username")    || opts.username,
           width       = $(this).attr("data-coderwall-badge-width") || opts.width,
           orientation = $(this).attr("data-coderwall-orientation") || opts.orientation,
@@ -33,7 +34,7 @@
       root.addClass("coderwall-root").addClass(orientation);
       
       $.getJSON(url, function(response) {
-        $(response.data.badges).each(function() {
+              $(response.data.badges).each(function() {
           var link = $("<a/>").attr({ href: CODERWALL_USER_URL.replace(/:username/, username) }),
               img = $("<img/>")
                 .addClass("coderwall-badge")
@@ -42,9 +43,14 @@
           link.append(img);
           root.append(link);
         });
-
         root.append(LOGO_HTML);
-      });
+      }).error(function() {
+        if(not_found) {  
+        root.append($('<small>Have a coderwall account using a different name than your rubygems account? Click<a href="' + not_found + '"> here </a> to claim your account.</small>'));
+        }
+      })
+;
+      
     });
   };
 

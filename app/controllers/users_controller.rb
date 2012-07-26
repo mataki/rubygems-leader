@@ -21,10 +21,16 @@ class UsersController < ApplicationController
       format.json { render json: @users }
     end
   end
+  
+  def claim_identity
+    puts params.inspect
+    @user = User.find(params[:id])
+    UserMailer.claim_identity(@user)
+    redirect_to :users
+  end
 
   def show
     @user = User.find params[:id]
-
     respond_to do |format|
       format.html
       format.json { render json: @user }
