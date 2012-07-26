@@ -6,22 +6,23 @@
 .page-info
   != page_entries_info @users
 
-%table.table.table-striped
+%table.table.table-striped.table-bordered.table-condensed
   %thead
     %tr
       %th Rank
       %th Name
       %th Total Downloads
       %th Coderwall
+
   %tbody
-    - @users.each do |user|
-      %tr
-        %td= user.rank
-        %td
-          = link_to rubygems_url(user.profile_id), target: "_blank" do
-            = gravatar_image_tag user.email, alt: user.handle, gravatar: { size: 30 }
-            = user.handle
-        %td= number_to_human user.total_downloads
-        %td{ :width => "300" }
-          %section.coderwall{ :'data-coderwall-username' => user.handle, :'data-coderwall-orientation' =>  "horizontal" }
+    = content_tag_for :tr, @users do |user|
+      %td= user.rank
+      %td
+        = link_to rubygems_url(user.profile_id), target: "_blank" do
+          = gravatar_image_tag user.email, alt: user.handle, gravatar: { size: 30 }
+          = user.handle
+      %td= number_to_human user.total_downloads
+      %td{ :width => "300" }
+        %section.coderwall{ :'data-coderwall-username' => user.handle, :'data-coderwall-orientation' =>  "horizontal" }
+
 = paginate @users
