@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @users }
+      format.json { render json: @users.to_json(except: :email) }
     end
   end
 
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.json { render json: @user }
+      format.json { render json: @user.to_json(except: :email) }
     end
   end
 
