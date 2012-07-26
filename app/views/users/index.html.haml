@@ -1,6 +1,6 @@
 = form_tag root_path, method: :get, class: "well form-search" do
   Search by rubygems.org name
-  = text_field_tag :user, params[:user], class: "input-medium search-query"
+  = text_field_tag :page, @handle, class: "input-medium search-query"
   = submit_tag "Search", class: "btn"
 
 .page-info
@@ -24,4 +24,4 @@
         %td= number_to_human user.total_downloads
         %td{ :width => "300" }
           %section.coderwall{ :'data-coderwall-username' => user.handle, :'data-coderwall-orientation' =>  "horizontal" }
-= paginate @users if params[:user].blank?
+= paginate @users
