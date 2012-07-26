@@ -16,6 +16,23 @@ EOF
     code.html_safe
   end
 
+  def adsense_mob
+    code = <<-EOF
+<script type="text/javascript"><!--
+google_ad_client = "ca-pub-4089366119938060";
+/* rubygems-leader-mob */
+google_ad_slot = "6146684524";
+google_ad_width = 320;
+google_ad_height = 50;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+EOF
+    code.html_safe
+  end
+
   def analytics
     return unless Rails.env.production?
     code = <<-EOF
