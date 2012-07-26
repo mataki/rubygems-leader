@@ -26,9 +26,9 @@
       = render "layouts/flash", flash: flash
       .content
         .row
-          .span9
+          .span10
             = yield
-          .span3
+          .span2
             %ul.nav.nav-tabs.nav-stacked
               = menu_link_to "Users", :users
               = menu_link_to "Teams", :teams
