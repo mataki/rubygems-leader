@@ -1,18 +1,19 @@
 class Fetcher
  
   # instantiates a new fetcher for a specific rubygems profile
-  # @param [Integer] profile_id the id of the profile to fetch for
-  def initialize(profile_id)
-    @profile_id = profile_id
+  # @param [Integer] user the user to fetch for
+  def initialize(user)
+    @user = user
   end
 
+  attr_reader :user
 
   # TODO move this stuff out into a pair of jobs:
   # UpdateScheduler - spins off single UpdateUser jobs
   # UpdateUser - runs update_from_ruby_gems for the profile_id
   def self.fetch_and_save!(profile_id)
     user = User.find_or_initialize_by_profile_id(profile_id)
-    user.update_from_rubygems
+    user.update_facts
   end
 
   def self.crawl_numeric(start_num, range)
@@ -47,12 +48,12 @@ class Fetcher
     end
   end
 
-  def self.get(profile_id)
-    new(profile_id).get
+  def self.get(user)
+    new(user).get
   end
 
   def get
-    @data ||= { handle: handle, total_downloads: total_downloads, email: email }
+    @data ||= { handle: handle, total_downloads: total_downloads, email: email, coderwall_name: coderwall_name }
   end
 
   private
@@ -62,11 +63,20 @@ class Fetcher
   end
 
   def page
-    @page ||= agent.get(Fetcher.fetch_url % @profile_id)
+    @page ||= agent.get(Fetcher.fetch_url % @user.profile_id)
   end
 
   def handle
     page.search("#profile-name").inner_text
+  end
+
+  def coderwall_name
+      begin
+        Mechanize.new.get(Fetcher.coderwall_url % CGI::escape(handle))
+        return handle
+      rescue Mechanize::ResponseCodeError => e
+        #noop
+      end
   end
 
   def total_downloads
@@ -86,6 +96,9 @@ class Fetcher
     @agent ||= Mechanize.new
   end
 
+  def self.coderwall_url
+    @@coderwall_url ||= "http://coderwall.com/%s"
+  end
   def self.fetch_url
     @@fetch_url ||= "http://rubygems.org/profiles/%s"
   end

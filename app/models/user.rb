@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  attr_accessible :email, :handle, :profile_id, :total_downloads
+  attr_accessible :email, :handle, :profile_id, :total_downloads, :coderwall_name
 
   has_many :memberships
   has_many :teams, through: :memberships
@@ -12,10 +12,10 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :profile_id
 
   def fetcher
-    @fetcher ||= Fetcher.new(profile_id)
+    @fetcher ||= Fetcher.new(self)
   end
 
-  def update_from_rubygems
+  def update_facts
     self.attributes = fetcher.get
     if total_downloads > 0
       self.save!

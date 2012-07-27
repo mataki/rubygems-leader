@@ -16,7 +16,8 @@ describe Fetcher do
     # and spinning up an instance this is a close to reality as we can get.
     before :all do
       pending 'cannot connect to rubygems' unless rubygems_is_up?
-      fetcher = Fetcher.new(1)
+      user = FactoryGirl.build(:user, profile_id: 1)
+      fetcher = Fetcher.new(user)
       @fetcher_data = fetcher.get
     end
 
@@ -29,6 +30,10 @@ describe Fetcher do
 
     it "retrieves the user's total downloads" do
       @fetcher_data[:total_downloads].should >= 3808238
+    end
+
+    it "retrieves the user's coderwall_name when it is the same as the handle" do
+      @fetcher_data[:coderwall_name].should eq(@fetcher_data[:handle])
     end
   end
 end
