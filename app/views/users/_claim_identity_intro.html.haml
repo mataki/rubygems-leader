@@ -1,0 +1,24 @@
+#claim_identity_intro.modal.hide
+  .modal-header
+    %button.close{ :type => "button", :'data-dismiss' => "modal" }
+      ×
+    %h3
+      Where's my Geek Cred!?
+  .modal-body
+    %p
+      Rubygems-leader uses your Rubygems account name to lookup badges on coderwall. 
+      If you are using a different name on coderwall, please click the button below and we will send an email to your registered Rubygems account email 
+      address with instructions on how you can associate a separate name for claiming your Coderwall Geek Cred.
+    %p
+      Not on coderwall yet? What are you waiting for?
+      %span.coderwall-logo
+        %a{ :href => "http://coderwall.com" }
+          %img{ :src => 'http://coderwall.com/images/icon.png', :class => 'coderwall-icon' }
+          %span.coderwall-tag-container
+            %span.coderwall-tag.name
+              coderwall
+  .modal-footer
+    %a.btn{ :href => "#", :'data-dismiss' => "modal"}
+      Close
+    %a.btn.btn-primary{ :href => "#"}
+      Claim Your Identity

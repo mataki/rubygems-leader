@@ -23,6 +23,9 @@
           = user.handle
       %td= number_to_human user.total_downloads
       %td{ :width => "300" }
-        %section.coderwall{ :'data-coderwall-username' => user.handle, :'data-coderwall-orientation' =>  "horizontal" }
-
+        - if user.coderwall_name
+          %section.coderwall{ :'data-coderwall-username' => user.coderwall_name }
+        - else
+          = link_to "Get your geek cred!", "#", class: 'claim-identity', url: user_claim_identity_path(user)
 = paginate @users
+= render partial: "claim_identity_intro"

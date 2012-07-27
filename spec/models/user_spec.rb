@@ -19,6 +19,7 @@ describe User do
     it { should allow_mass_assignment_of :email }
     it { should allow_mass_assignment_of :profile_id }
     it { should allow_mass_assignment_of :total_downloads }
+    it { should allow_mass_assignment_of :coderwall_name }
   end
 
   context 'class methods' do

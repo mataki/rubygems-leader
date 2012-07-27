@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723114007) do
+ActiveRecord::Schema.define(:version => 20120727092347) do
+
+  create_table "claim_identity_keys", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "key"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "claim_identity_keys", ["user_id"], :name => "index_claim_identity_keys_on_user_id"
 
   create_table "memberships", :force => true do |t|
     t.integer  "team_id"
@@ -55,6 +64,7 @@ ActiveRecord::Schema.define(:version => 20120723114007) do
     t.datetime "created_at",      :null => false
     t.datetime "updated_at",      :null => false
     t.integer  "rank"
+    t.string   "coderwall_name"
   end
 
   add_index "users", ["rank"], :name => "index_users_on_rank"
