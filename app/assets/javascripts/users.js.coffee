@@ -7,7 +7,9 @@ $(document).ready ->
     modal = "#claim_identity_intro"
     $(modal).modal('show')
     $(modal).on 'hide', ->
-    $(modal).find('a.btn-primary').click( (event) =>
+    $(modal).find('a.btn-primary').click (event) =>
       $(modal).modal('hide')
-      $.ajax(url).always( (response) ->
-        $(response).modal('show')))
+      $.ajax(url).always (response) ->
+        $(response).modal('show')
+      return false
+    return false
