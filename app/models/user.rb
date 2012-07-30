@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :rank_histories
   has_many :claim_identity_keys
   has_one :github_user
-  
+
   validates :handle, presence: true
   validates :email, presence: true
   validates :profile_id, presence: true
