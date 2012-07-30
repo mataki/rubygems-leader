@@ -2,9 +2,13 @@ require 'spec_helper'
 
 def rubygems_is_up?
   begin
-    Mechanize.new.get('http://status.rubygems.org')
+    Mechanize.new do |agent|
+      agent.open_timeout = 2
+      agent.get('http://status.rubygems.org')
+    end
   rescue Exception => response_error
     puts 'status.rubygems.org returned' << response_error.inspect.to_s
+    puts 'Fetcher specs that require access to a remote will be marked pending'
     false
   end
 end
