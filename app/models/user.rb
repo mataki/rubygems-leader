@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :teams, through: :memberships
   has_many :rank_histories
+  has_many :claim_identity_keys
 
   validates :handle, presence: true
   validates :email, presence: true
