@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
 
   def auth_failure
     redirect_to root_path, alert: params[:message]
+     redirect_to root_path, alert: params[:message]
   end
 
   def current_user
