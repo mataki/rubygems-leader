@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
   validates :handle, presence: true
   validates :email, presence: true
   validates :profile_id, presence: true
-
   validates_uniqueness_of :profile_id
 
   def fetcher

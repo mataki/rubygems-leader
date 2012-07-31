@@ -51,6 +51,7 @@ gem "omniauth-github"
 
 group :development, :test do
   gem "heroku_san"
+  gem "omniauth-github"
   gem "rspec-rails", ">= 2.0.1"
   # gem "letter_opener", git: "git://github.com/ryanb/letter_opener.git"
 end
