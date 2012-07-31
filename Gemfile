@@ -46,6 +46,7 @@ gem 'gravatar_image_tag'
 gem 'kaminari'
 gem "simple_form"
 gem "dekiru"
+gem 'rack-mini-profiler'
 
 group :development, :test do
   gem "heroku_san"
