@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
     Rack::MiniProfiler.authorize_request if params[:miniprofiler].present?
   end
 
-  def current_user
+ def current_user
     return unless session[:user_id]
     @current_user ||= User.find(session[:user_id])
   end
