@@ -46,11 +46,13 @@ gem 'gravatar_image_tag'
 gem 'kaminari'
 gem "simple_form"
 gem "dekiru"
+gem "gh", git: "git://github.com/rkh/gh.git"
 
 group :development, :test do
   gem "heroku_san"
+  gem "omniauth-github"
   gem "rspec-rails", ">= 2.0.1"
-  gem "letter_opener", git: "git://github.com/ryanb/letter_opener.git"
+  # gem "letter_opener", git: "git://github.com/ryanb/letter_opener.git"
 end
 
 group :test do

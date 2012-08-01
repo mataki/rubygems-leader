@@ -11,14 +11,26 @@
     = stylesheet_link_tag "application", :media => "all"
     = analytics
   %body
-    = forkmeongithub
     .navbar.navbar-fixed-top
+      = forkmeongithub
       .navbar-inner
         .container
           %a.brand(href="/") RubygemsLeader
+          - if current_user
+            .nav-bar-item.pull-right.btn-login
+              %a.btn.btn-inverse{ :href => logout_path}
+                %span.icon-signout.icon-large
+                  Logout
+          - else
+            .nav-bar-item.pull-right.btn-login
+              %a.btn.btn-inverse{ :href => "/auth/github" }
+                %span.icon-github-sign.icon-large
+                  Sign in with 
+                  %b
+                    GitHub
 
+    = render "layouts/flash", flash: flash
     .container
-      = render "layouts/flash", flash: flash
       .content
         .row
           .span10
