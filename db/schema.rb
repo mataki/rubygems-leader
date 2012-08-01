@@ -11,16 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120727092347) do
+ActiveRecord::Schema.define(:version => 20120731125150) do
 
   create_table "claim_identity_keys", :force => true do |t|
     t.integer  "user_id"
     t.string   "key"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "github_user_id"
   end
 
   add_index "claim_identity_keys", ["user_id"], :name => "index_claim_identity_keys_on_user_id"
+
+  create_table "github_users", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "uid"
+    t.string   "email"
+    t.string   "login"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "memberships", :force => true do |t|
     t.integer  "team_id"
@@ -48,6 +58,16 @@ ActiveRecord::Schema.define(:version => 20120727092347) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  create_table "sessions", :force => true do |t|
+    t.string   "session_id", :null => false
+    t.text     "data"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
+  add_index "sessions", ["updated_at"], :name => "index_sessions_on_updated_at"
 
   create_table "teams", :force => true do |t|
     t.string   "name"

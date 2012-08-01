@@ -1,13 +1,8 @@
 - if flash[:notice].present?
-  .alert.alert-success
-    = link_to "#", class: "close", data: {dismiss: "alert"} do
-      ×
+  .alert.alert-success.flash{ data: {dismiss: "alert"} }
     %strong Success!
     = flash[:notice]
-
 - if flash[:alert].present?
-  .alert.alert-error
-    = link_to "#", class: "close", data: {dismiss: "alert"} do
-      ×
+  .alert.alert-error.flash{ data: { dismiss: "alert" } }
     %strong Error!
     = flash[:alert]

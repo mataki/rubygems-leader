@@ -47,6 +47,7 @@ gem 'kaminari'
 gem "simple_form"
 gem "dekiru"
 gem 'rack-mini-profiler'
+gem "omniauth-github"
 
 group :development, :test do
   gem "heroku_san"
