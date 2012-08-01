@@ -1,14 +1,9 @@
 GIT
-  remote: git://github.com/rkh/gh.git
-  revision: f01ff0648f35f42ac1844b821930c15974fd9f40
+  remote: git://github.com/ryanb/letter_opener.git
+  revision: a289028bdfa6003c03d232887a3666b3200cefa5
   specs:
-    gh (0.7.3)
-      addressable
-      backports (~> 2.3)
-      faraday (~> 0.8)
-      multi_json (~> 1.0)
-      net-http-persistent (>= 2.7)
-      net-http-pipeline
+    letter_opener (0.0.2)
+      launchy
 
 GEM
   remote: https://rubygems.org/
@@ -42,7 +37,6 @@ GEM
       multi_json (~> 1.0)
     addressable (2.2.8)
     arel (3.0.2)
-    backports (2.6.2)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -153,7 +147,6 @@ GEM
     multipart-post (1.1.5)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.7)
-    net-http-pipeline (1.0.1)
     netrc (0.7.5)
     nokogiri (1.5.5)
     ntlm-http (0.1.1)
@@ -278,7 +271,6 @@ DEPENDENCIES
   dekiru
   factory_girl_rails
   faker
-  gh!
   gravatar_image_tag
   guard-rspec
   haml (>= 3.0.0)
@@ -287,6 +279,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy
+  letter_opener!
   mechanize
   omniauth-github
   pg
