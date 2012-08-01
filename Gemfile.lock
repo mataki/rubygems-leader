@@ -1,9 +1,14 @@
 GIT
-  remote: git://github.com/ryanb/letter_opener.git
-  revision: a289028bdfa6003c03d232887a3666b3200cefa5
+  remote: git://github.com/rkh/gh.git
+  revision: f01ff0648f35f42ac1844b821930c15974fd9f40
   specs:
-    letter_opener (0.0.2)
-      launchy
+    gh (0.7.3)
+      addressable
+      backports (~> 2.3)
+      faraday (~> 0.8)
+      multi_json (~> 1.0)
+      net-http-persistent (>= 2.7)
+      net-http-pipeline
 
 GEM
   remote: https://rubygems.org/
@@ -37,6 +42,7 @@ GEM
       multi_json (~> 1.0)
     addressable (2.2.8)
     arel (3.0.2)
+    backports (2.6.2)
     builder (3.0.0)
     capybara (1.1.2)
       mime-types (>= 1.16)
@@ -73,6 +79,8 @@ GEM
       railties (>= 3.0.0)
     faker (1.0.1)
       i18n (~> 0.4)
+    faraday (0.8.1)
+      multipart-post (~> 1.1)
     ffi (1.0.11)
     gravatar_image_tag (1.1.3)
     guard (1.2.3)
@@ -86,6 +94,7 @@ GEM
       activesupport (~> 3.0)
       haml (~> 3.0)
       railties (~> 3.0)
+    hashie (1.2.0)
     heroku (2.28.15)
       heroku-api (~> 0.2.12)
       launchy (>= 0.3.2)
@@ -100,12 +109,15 @@ GEM
       heroku-api (>= 0.1.2)
       rake
     hike (1.2.1)
+    httpauth (0.1)
     i18n (0.6.0)
     journey (1.0.4)
     jquery-rails (2.0.2)
       railties (>= 3.2.0, < 5.0)
       thor (~> 0.14)
     json (1.7.3)
+    jwt (0.1.5)
+      multi_json (>= 1.0)
     kaminari (0.13.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -138,11 +150,28 @@ GEM
       webrobots (~> 0.0, >= 0.0.9)
     mime-types (1.19)
     multi_json (1.3.6)
+    multipart-post (1.1.5)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.7)
+    net-http-pipeline (1.0.1)
     netrc (0.7.5)
     nokogiri (1.5.5)
     ntlm-http (0.1.1)
+    oauth2 (0.8.0)
+      faraday (~> 0.8)
+      httpauth (~> 0.1)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      rack (~> 1.2)
+    omniauth (1.1.0)
+      hashie (~> 1.2)
+      rack
+    omniauth-github (1.0.2)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+    omniauth-oauth2 (1.1.0)
+      oauth2 (~> 0.8.0)
+      omniauth (~> 1.0)
     pg (0.14.0)
     polyglot (0.3.3)
     rack (1.4.1)
@@ -249,6 +278,7 @@ DEPENDENCIES
   dekiru
   factory_girl_rails
   faker
+  gh!
   gravatar_image_tag
   guard-rspec
   haml (>= 3.0.0)
@@ -257,8 +287,8 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy
-  letter_opener!
   mechanize
+  omniauth-github
   pg
   rack-mini-profiler
   rails (= 3.2.6)

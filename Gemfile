@@ -47,11 +47,12 @@ gem 'kaminari'
 gem "simple_form"
 gem "dekiru"
 gem 'rack-mini-profiler'
+gem "omniauth-github"
 
 group :development, :test do
   gem "heroku_san"
   gem "rspec-rails", ">= 2.0.1"
-  gem "letter_opener", git: "git://github.com/ryanb/letter_opener.git"
+  # gem "letter_opener", git: "git://github.com/ryanb/letter_opener.git"
 end
 
 group :test do

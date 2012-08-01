@@ -1,0 +1,31 @@
+- if @success
+  .modal
+    .modal-header
+      %button.close{ :type => 'button', :'data-dismiss' => 'modal' }
+        x
+      %h3
+        Your Mission Begins....
+    .modal-body
+      %p
+        We've send mail to the address registered with your Rubygems account. 
+        Your mission, should you choose to accept it, is to follow the instructions in that mail and
+        associate your GitHub account with your Rubygems account. This lets us positively identify your coderwall badges.
+
+        You have two hours to complete this mission.
+    .modal-footer
+      %a.btn{ :href => '#', :'data-dismiss' => 'modal' }
+        Close
+- else
+  .modal
+    .modal-header
+      %button.close{ :type => 'button', :'data-dismiss' => 'modal' }
+        x
+      %h3
+        Hummina?!
+    .modal-body
+      That just aint right! Looks like the handle you provided does not exist or is associated with another Github account already!
+      Have another go, maybe you just mistyped something?
+    .modal-footer
+      %a.btn{ :href => '#', :'data-dismiss' => 'modal' }
+        Close
+
