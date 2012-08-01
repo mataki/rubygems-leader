@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/ryanb/letter_opener.git
+  revision: a289028bdfa6003c03d232887a3666b3200cefa5
+  specs:
+    letter_opener (0.0.2)
+      launchy
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -272,6 +279,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   launchy
+  letter_opener!
   mechanize
   omniauth-github
   pg
