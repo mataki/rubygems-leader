@@ -47,5 +47,5 @@
         - if user.coderwall_name
           %section.coderwall{ :'data-coderwall-username' => user.coderwall_name }
         - else
-          = link_to "login via GitHub and get your geek cred!", "#", class: 'claim-identity', url: '/auth/github'
+          = link_to "Sign in with GitHub to show your geek cred!", '/auth/github'
 = paginate @users
