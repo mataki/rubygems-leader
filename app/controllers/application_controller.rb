@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_filter :miniprofiler
 
   def auth_failure
-     redirect_to root_path, alert: params[:message]
+    redirect_to root_path, alert: params[:message]
   end
 
   private
