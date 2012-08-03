@@ -12,7 +12,7 @@
 
 # Ignore OAuth dev secrets
 oauth_github.yml
-
+sendgrid.yml
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
