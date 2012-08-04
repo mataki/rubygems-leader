@@ -9,17 +9,6 @@
     orientation: "vertical"
   };
 
-  var LOGO_HTML = "";
-  /* +
-     "<div class='coderwall-logo'>" +
-     "  <a href='http://coderwall.com'>" +
-     "    <img src='http://coderwall.com/images/icon.png' class='coderwall-icon' />" +
-     "    <div class='coderwall-tag-container'>" +
-     "      <div class='coderwall-tag-name'>coderwall</div>" +
-     "    </div>" +
-     "  </a>" +
-     "</div>";
-     */
   $.fn.coderwall = function(opts) {
     opts = $.extend({}, DEFAULTS, opts);
 
