@@ -9,7 +9,7 @@ if Rails.env.development?
     end
   end
 end
-unless Rails.env.test
+unless Rails.env.test?
 ActionMailer::Base.smtp_settings = {
   :address        => 'smtp.sendgrid.net',
   :port           => '587',
