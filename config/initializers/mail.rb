@@ -1,6 +1,6 @@
 # quick hack to export key/secret to env in develement from omniauth_github.yml
 # These will need to be exported on heroku
-unless Rails.env.production?
+if Rails.env.developent?
   sendgrid_yaml = File.expand_path('../../sendgrid.yml', __FILE__)
   if File.exists?(sendgrid_yaml)
     data = HashWithIndifferentAccess.new(YAML.load(File.read(sendgrid_yaml)))
