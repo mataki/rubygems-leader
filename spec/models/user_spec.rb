@@ -1,9 +1,17 @@
 require 'spec_helper'
 
 describe User do
+
   context 'factory' do
     subject { FactoryGirl.build :user }
     it { should be_valid }
+  end
+
+  context 'associations' do
+    it { should have_many :claim_identity_keys }
+    it { should have_many :memberships }
+    it { should have_many :teams, through: :memberships }
+    it { should have_many :rank_histories }
   end
 
   context 'validations' do

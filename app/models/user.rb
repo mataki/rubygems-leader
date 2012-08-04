@@ -4,11 +4,12 @@ class User < ActiveRecord::Base
   has_many :memberships
   has_many :teams, through: :memberships
   has_many :rank_histories
+  has_many :claim_identity_keys
+  has_one :github_user
 
   validates :handle, presence: true
   validates :email, presence: true
   validates :profile_id, presence: true
-
   validates_uniqueness_of :profile_id
 
   def fetcher
@@ -29,8 +30,10 @@ class User < ActiveRecord::Base
 
   def self.refresh_rank
     self.transaction do
-      # SQL-FOO - NOTE this will only work on postgres!!
-      sql = "update users
+      # SQL-FU - NOTE this will only work on postgres!!
+      # deep_rank() would be better than row_number(), but it will break our lively pagination based searching as many
+      # users can have the same ranking
+sql = "update users
                set rank = d_rnk
                from (SELECT id,row_number() OVER (ORDER BY total_downloads DESC) as d_rnk FROM users) as ranked
                where ranked.id = users.id;"

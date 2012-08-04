@@ -1,3 +1,24 @@
+- if current_user
+  %table.users.table.table-striped.table-bordered.table-condensed
+    %thead
+      %tr
+        %th Rank
+        %th Name
+        %th Total Downloads
+        %th Coderwall
+
+    %tbody
+      %tr
+        %td= current_user.rank
+        %td
+          = link_to rubygems_url(current_user.profile_id), target: "_blank" do
+            = gravatar_image_tag current_user.email, alt: current_user.handle, gravatar: { size: 30 }
+            = current_user.handle
+        %td= number_to_human current_user.total_downloads
+        %td{ :width => "300" }
+          - if current_user.coderwall_name
+            %section.coderwall{ :'data-coderwall-username' => current_user.coderwall_name }
+
 = form_tag root_path, method: :get, class: "well form-search" do
   Search by rubygems.org name
   = text_field_tag :page, @handle, class: "input-medium search-query"
@@ -26,6 +47,5 @@
         - if user.coderwall_name
           %section.coderwall{ :'data-coderwall-username' => user.coderwall_name }
         - else
-          = link_to "Get your geek cred!", "#", class: 'claim-identity', url: user_claim_identity_path(user)
+          = link_to "Sign in with GitHub to show your geek cred!", '/auth/github'
 = paginate @users
-= render partial: "claim_identity_intro"

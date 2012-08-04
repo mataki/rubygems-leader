@@ -1,12 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'rails', '3.2.6'
+gem 'rails', '3.2.8.rc1'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :production do
-  gem "pg"
   gem "thin"
 end
 
@@ -15,10 +14,6 @@ end
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -37,6 +32,7 @@ end
 # To use debugger
 # gem 'debugger'
 
+gem "pg"
 gem "haml", ">= 3.0.0"
 gem "haml-rails"
 gem "jquery-rails"
@@ -47,6 +43,7 @@ gem 'kaminari'
 gem "simple_form"
 gem "dekiru"
 gem 'rack-mini-profiler'
+gem "omniauth-github"
 
 group :development, :test do
   gem "heroku_san"
@@ -62,5 +59,4 @@ group :test do
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'shoulda-matchers', :require => false
-  # poltergeist for requests specs?
 end

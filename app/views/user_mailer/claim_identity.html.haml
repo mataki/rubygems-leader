@@ -1,14 +1,15 @@
-%h1
-  Get your Geek Cred on!
+%body
+  %h1
+    Get your Geek Cred on!
 
-%p
-  Looks like you registered different names with Rubygems and Coderwall or someone stole your Rubygems handle and you are showing some other peeps cred on Rubygems-leader.
-  Well, let's get that fixed! Follow the url below to update your Coderwall account name.
+  %p
+    Looks like you registered different names with Rubygems and Github.
+    Well, let's get that fixed! Follow the url below to update your Coderwall account name.
 
-= link_to @url, @url
+  = link_to @url, @url
 
-%hr
+  %hr
 
-.footer{style: "text-align: center; color: #444;"}
-  From
-  = link_to "Rubygems-leader", root_url, {style: "text-align: center; color: #555;"}
+  .footer{style: "text-align: center; color: #444;"}
+    From
+    = link_to "Rubygems-leader", root_url, {style: "text-align: center; color: #555;"}

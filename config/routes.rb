@@ -4,11 +4,16 @@ RubygemsLeader::Application.routes.draw do
     resources :memberships
   end
 
-  resources :users, only: %w(index show edit update) do
-    get 'claim_identity'
-  end
+  resources :users, only: %w(index show)
 
-  #match 'user/:id/claim_identity' => "users#claim_identity"
+  resources :github_users, only: %w(show) do
+    get 'confirm_identity'
+    get 'request_identity'
+  end
+  #omniauth callback
+  match '/auth/:provider/callback', to: 'sessions#create'
+  match '/auth/failure', to: 'application#auth_failure'
+  match '/logout', to: 'sessions#logout'
   root to: "users#index"
 
   # The priority is based upon order of creation:
