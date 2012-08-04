@@ -13,7 +13,7 @@ describe GithubUser do
     it { should allow_mass_assignment_of :uid }
     it { should allow_mass_assignment_of :email }
     it { should allow_mass_assignment_of :login }
-    it { should allow_mass_assignment_of :user }
+    it { should allow_mass_assignment_of :user_id }
   end
   
   context 'request identity' do
@@ -26,7 +26,7 @@ describe GithubUser do
     end
 
     it 'does nothing if it already has a user' do
-      @gh_user.update_attributes(user: @user)
+      @gh_user.update_attributes(user_id: @user.id)
       @gh_user.request_identity(@user.handle).should be_nil 
     end
 
@@ -62,9 +62,9 @@ describe GithubUser do
     before :each do
       gh_user = FactoryGirl.build(:github_user)
       OmniAuth.config.add_mock(:github, { provider: :github, 
-                                        'uid' => gh_user.uid,
-                                        'email' => gh_user.email,
-                                        'extra' =>  { 'raw_info' => { 'login' => gh_user.login } } })
+                                        uid: gh_user.uid,
+                                        email: gh_user.email,
+                                        extra: { 'raw_info' => {email: gh_user.email, login: gh_user.login } } })
       @data = OmniAuth.config.mock_auth[:github]
     end
 

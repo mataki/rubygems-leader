@@ -1,7 +1,7 @@
 class GithubUser < ActiveRecord::Base
   belongs_to :user
   
-  attr_accessible :uid, :login, :email, :user
+  attr_accessible :uid, :login, :email, :user_id
 
   def request_identity(user_name)
     # reject any user that already has an associated github user
@@ -16,20 +16,31 @@ class GithubUser < ActiveRecord::Base
     identity_key.associate_accounts!
   end
 
-  def self.authenticate(data)
-    parsed_data = parse_omniauth_data(data)
-    user = User.find_by_email(parsed_data[:email])
-    attr = parsed_data.merge({ user: user })
-    gh_user = GithubUser.find_or_create_by_uid(attr)
-    user.update_attributes(coderwall_name: gh_user.login) if user
-    gh_user
+  def self.authenticate(oauth_hash)
+    find_or_create_by_oauth oauth_hash
+  end
+
+  def associate_with_user user
+    return unless user.is_a?(User)
+    self.update_attributes(user_id: user.id)
+    user.update_attributes(coderwall_name: login)
+    self
   end
 
   private
+ 
+  def self.find_or_create_by_oauth oauth
+    attr = parse_omniauth_data(oauth)
+    gh_user = GithubUser.find_or_create_by_uid(attr)
+    if user = User.find_by_email(gh_user.email)
+      gh_user.associate_with_user user
+    end
+    gh_user
+  end
 
   def self.parse_omniauth_data data
     { uid: data.uid.to_s,
-      email: data.email,
+      email: data.extra.raw_info.email,
       login: data.extra.raw_info.login }
   end
 end

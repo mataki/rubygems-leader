@@ -18,10 +18,9 @@ class ClaimIdentityKey < ActiveRecord::Base
 
   def associate_accounts!
     return if expired?
-    github_user.update_attributes(user: user)
-    user.update_attributes(coderwall_name: github_user.login)
+    ref_github_user = github_user.associate_with_user user
     self.delete
-    github_user
+    ref_github_user
   end
 
   private

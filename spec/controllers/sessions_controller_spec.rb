@@ -7,8 +7,7 @@ describe SessionsController do
     @gh_user = FactoryGirl.build(:github_user)
     OmniAuth.config.add_mock(:github, { provider: :github, 
                                         uid: @gh_user.uid,
-                                        email: @gh_user.email,
-                                        extra: { raw_info: { login: @gh_user.login } } })
+                                        extra: { raw_info: { email: @gh_user.email, login: @gh_user.login } } })
     request.env["omniauth.auth"] = OmniAuth.config.mock_auth[:github]
   end
 
