@@ -18,3 +18,4 @@ sendgrid.yml
 /tmp
 /config/database.yml*
 /.sass-cache/
+/.powenv
