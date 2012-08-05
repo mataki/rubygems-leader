@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 describe ClaimIdentityKey do
-  
+
   context 'associations' do
     it { should belong_to :user }
   end
-  
+
   context 'validations' do
     it { should validate_presence_of :user }
   end
-  
+
   context 'initialization' do
     before :each do
       user = FactoryGirl.create(:user)
@@ -19,7 +19,7 @@ describe ClaimIdentityKey do
     it 'creates a readonly key automatically' do
       @claim_identity_key.key.should_not be_nil
     end
-    
+
     it 'should not be expired if saved_at is nil' do
       @claim_identity_key.expired?.should be_false
     end
@@ -34,7 +34,7 @@ describe ClaimIdentityKey do
       @claim_identity_key.expired?.should be_false
     end
   end
-  
+
   it "associates it's user with it's github user" do
     gh_user = FactoryGirl.create(:github_user)
     user = FactoryGirl.create(:user)

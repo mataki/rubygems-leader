@@ -12,13 +12,13 @@ describe GithubUsersController do
       get :show, id: @gh_user.id
       assigns(:github_user).should eq(@gh_user)
     end
-    
+
     it 'only allows access to your own github show page' do
       get :show, id: 13
       flash[:alert].should be
       response.should redirect_to(root_path)
     end
-    
+
     it 'emails identity requests' do
       user = FactoryGirl.create(:user)
       get :request_identity, github_user_id: @gh_user.id, user_handle: user.handle

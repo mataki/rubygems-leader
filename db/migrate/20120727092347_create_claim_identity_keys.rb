@@ -4,7 +4,7 @@ class CreateClaimIdentityKeys < ActiveRecord::Migration
      t.references :user
      t.string :key
 
-     t.timestamps 
+     t.timestamps
     end
     add_index :claim_identity_keys, :user_id
   end

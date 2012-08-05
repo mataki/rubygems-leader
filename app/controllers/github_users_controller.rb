@@ -36,7 +36,8 @@ class GithubUsersController < ApplicationController
     end
   end
 
-  private 
+  private
+
   def request_identity_url(github_user, key)
     github_user_confirm_identity_path(github_user, key: key, only_path: false)
   end

@@ -1,5 +1,5 @@
 class Fetcher
- 
+
   # instantiates a new fetcher for a specific rubygems profile
   # @param [Integer] user the user to fetch for
   def initialize(user)
@@ -71,12 +71,12 @@ class Fetcher
   end
 
   def coderwall_name
-      begin
-        Mechanize.new.get(Fetcher.coderwall_url % CGI::escape(handle))
-        return handle
-      rescue Mechanize::ResponseCodeError => e
-        #noop
-      end
+    begin
+      Mechanize.new.get(Fetcher.coderwall_url % CGI::escape(handle))
+      return handle
+    rescue Mechanize::ResponseCodeError => e
+      #noop
+    end
   end
 
   def total_downloads
@@ -103,4 +103,3 @@ class Fetcher
     @@fetch_url ||= "http://rubygems.org/profiles/%s"
   end
 end
-

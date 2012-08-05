@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe GithubUser do
-  context 'factory' do 
+  context 'factory' do
     subject { FactoryGirl.build(:github_user) }
     it { should be_valid }
   end
@@ -15,7 +15,7 @@ describe GithubUser do
     it { should allow_mass_assignment_of :login }
     it { should allow_mass_assignment_of :user_id }
   end
-  
+
   context 'request identity' do
     before :each do
       @gh_user = FactoryGirl.create(:github_user)
@@ -27,7 +27,7 @@ describe GithubUser do
 
     it 'does nothing if it already has a user' do
       @gh_user.update_attributes(user_id: @user.id)
-      @gh_user.request_identity(@user.handle).should be_nil 
+      @gh_user.request_identity(@user.handle).should be_nil
     end
 
     it 'returns a claim_identity_key if the user handle is valid and there is no user associated' do
@@ -38,7 +38,7 @@ describe GithubUser do
     before :each do
       @gh_user = FactoryGirl.create(:github_user)
       @user = FactoryGirl.create(:user)
-      @claim_identity_key = FactoryGirl.create(:claim_identity_key, user: @user, github_user: @gh_user) 
+      @claim_identity_key = FactoryGirl.create(:claim_identity_key, user: @user, github_user: @gh_user)
     end
 
     it 'does nothing if the key provided does not exist' do
@@ -61,10 +61,10 @@ describe GithubUser do
   context 'authentication' do
     before :each do
       gh_user = FactoryGirl.build(:github_user)
-      OmniAuth.config.add_mock(:github, { provider: :github, 
-                                        uid: gh_user.uid,
-                                        email: gh_user.email,
-                                        extra: { 'raw_info' => {email: gh_user.email, login: gh_user.login } } })
+      OmniAuth.config.add_mock(:github, { provider: :github,
+                                 uid: gh_user.uid,
+                                 email: gh_user.email,
+                                 extra: { 'raw_info' => {email: gh_user.email, login: gh_user.login } } })
       @data = OmniAuth.config.mock_auth[:github]
     end
 
@@ -76,7 +76,7 @@ describe GithubUser do
     it 'loads existing users' do
       GithubUser.authenticate(@data)
       GithubUser.authenticate(@data)
-      GithubUser.all.size.should eq(1) 
+      GithubUser.all.size.should eq(1)
     end
   end
 end

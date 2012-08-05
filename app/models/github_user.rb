@@ -1,6 +1,6 @@
 class GithubUser < ActiveRecord::Base
   belongs_to :user
-  
+
   attr_accessible :uid, :login, :email, :user_id
 
   def request_identity(user_name)
@@ -28,7 +28,7 @@ class GithubUser < ActiveRecord::Base
   end
 
   private
- 
+
   def self.find_or_create_by_oauth oauth
     attr = parse_omniauth_data(oauth)
     gh_user = GithubUser.find_or_create_by_uid(attr)
