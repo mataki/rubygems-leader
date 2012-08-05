@@ -1,5 +1,4 @@
 RubygemsLeader::Application.routes.draw do
-  
   resources :teams do
     resources :memberships
   end
@@ -10,10 +9,12 @@ RubygemsLeader::Application.routes.draw do
     get 'confirm_identity'
     get 'request_identity'
   end
+
   #omniauth callback
   match '/auth/:provider/callback', to: 'sessions#create'
   match '/auth/failure', to: 'application#auth_failure'
   match '/logout', to: 'sessions#logout'
+
   root to: "users#index"
 
   # The priority is based upon order of creation:
