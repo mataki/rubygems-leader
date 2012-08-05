@@ -9,8 +9,11 @@
 
 = link_to "View current ranking", root_path(page: @user.handle), class: "btn btn-large btn-primary"
 
-- if @user.coderwall_name
-  %section.coderwall{ :'data-coderwall-username' => @user.coderwall_name, :'data-coderwall-orientation' => "nomal" }
+.user-show-coderwall
+  - if @user.coderwall_name
+    %section.coderwall{ :'data-coderwall-username' => @user.coderwall_name, :'data-coderwall-orientation' => "nomal" }
+  - else
+    = link_to "Sign in with GitHub to show your geek cred!", '/auth/github'
 
 %table.table.table-striped
   %thead
