@@ -38,4 +38,12 @@ RubygemsLeader::Application.configure do
   config.action_mailer.delivery_method = :letter_opener
 
   config.action_mailer.default_url_options = { :host => "rubygems-leader.dev" }
+
+  sendgrid_yaml = File.expand_path('../../sendgrid.yml', __FILE__)
+  if File.exists?(sendgrid_yaml)
+    data = HashWithIndifferentAccess.new(YAML.load(File.read(sendgrid_yaml)))
+    data.each do |key, value|
+      ENV[key.to_s.upcase] = value
+    end
+  end
 end
