@@ -7,6 +7,11 @@
       = link_to rubygems_url(@user.profile_id), target: "_blank" do
         Go to rubygems.org
 
+= link_to "View current ranking", root_path(page: @user.handle), class: "btn btn-large btn-primary"
+
+- if @user.coderwall_name
+  %section.coderwall{ :'data-coderwall-username' => @user.coderwall_name, :'data-coderwall-orientation' => "nomal" }
+
 %table.table.table-striped
   %thead
     %th When
