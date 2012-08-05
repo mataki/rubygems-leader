@@ -17,3 +17,4 @@ sendgrid.yml
 /log/*.log
 /tmp
 /config/database.yml*
+/.sass-cache/
