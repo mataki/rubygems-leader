@@ -18,14 +18,17 @@
           %a.brand(href="/") RubygemsLeader
           - if current_user
             .nav-bar-item.pull-right.btn-login
-              %a.btn.btn-inverse{ :href => logout_path}
-                %span.icon-signout.icon-large
-                  Logout
+              = link_to current_user, class: "btn btn-inverse" do
+                %i.icon-user.icon-large
+                You
+              = link_to logout_path, class: "btn btn-inverse" do
+                %i.icon-signout.icon-large
+                Logout
           - else
             .nav-bar-item.pull-right.btn-login
               %a.btn.btn-inverse{ :href => "/auth/github" }
                 %span.icon-github-sign.icon-large
-                  Sign in with 
+                  Sign in with
                   %b
                     GitHub
 
