@@ -3,10 +3,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user
   before_filter :miniprofiler
 
-  def auth_failure
-    redirect_to root_path, alert: params[:message]
-  end
-
   private
 
   def miniprofiler

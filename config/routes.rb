@@ -12,7 +12,7 @@ RubygemsLeader::Application.routes.draw do
 
   #omniauth callback
   match '/auth/:provider/callback', to: 'sessions#create'
-  match '/auth/failure', to: 'application#auth_failure'
+  match '/auth/failure', to: 'sessions#auth_failure'
   match '/logout', to: 'sessions#logout'
 
   root to: "users#index"
