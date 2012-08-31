@@ -42,7 +42,7 @@ class Fetcher
   end
 
   def self.update_data(period = 3.day, limit = 30)
-    User.where("updated_at < ?", period.ago).limit(limit).each do |user|
+    User.where("updated_at < ?", period.ago).order('updated_at ASC').limit(limit).each do |user|
       fetch_and_save!(user.profile_id)
     end
   end

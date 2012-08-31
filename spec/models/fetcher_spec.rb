@@ -14,9 +14,8 @@ def rubygems_is_up?
 end
 
 describe Fetcher do
-
   context 'fetching' do
-    # NOTE This is using qrush's rubygems profile. Short of pulling the rubygems repo 
+    # NOTE This is using qrush's rubygems profile. Short of pulling the rubygems repo
     # and spinning up an instance this is a close to reality as we can get.
     before :all do
       pending 'cannot connect to rubygems' unless rubygems_is_up?
